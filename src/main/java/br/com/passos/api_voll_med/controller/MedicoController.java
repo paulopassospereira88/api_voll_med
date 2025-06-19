@@ -1,15 +1,15 @@
 package br.com.passos.api_voll_med.controller;
 
 import br.com.passos.api_voll_med.medico.DadosCadastroMedico;
+import br.com.passos.api_voll_med.medico.DadosListagemMedico;
 import br.com.passos.api_voll_med.medico.Medico;
 import br.com.passos.api_voll_med.medico.MedicoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/medicos")
@@ -27,5 +27,12 @@ public class MedicoController {
         Medico medico = new Medico(dadosCadastroMedico);
         medicoRepository.save(medico);
         return ResponseEntity.status(HttpStatus.CREATED).body(dadosCadastroMedico);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DadosListagemMedico>> listar(Pageable paginacao){
+        Page<DadosListagemMedico> medicos = medicoRepository.findAll(paginacao)
+                .map(DadosListagemMedico::new);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicos);
     }
 }
