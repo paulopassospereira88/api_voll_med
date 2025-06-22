@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/medicos")
@@ -22,10 +23,12 @@ public class MedicoController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<DadosCadastroMedico> cadastro(@RequestBody DadosCadastroMedico dadosCadastroMedico) {
+    public ResponseEntity<DadosDetalhamentoMedico> cadastro(@RequestBody DadosCadastroMedico dadosCadastroMedico, UriComponentsBuilder uriBuilder) {
         Medico medico = new Medico(dadosCadastroMedico);
         medicoRepository.save(medico);
-        return ResponseEntity.status(HttpStatus.CREATED).body(dadosCadastroMedico);
+
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
     }
 
     @GetMapping
@@ -37,11 +40,11 @@ public class MedicoController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<DadosListagemMedico> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+    public ResponseEntity<DadosDetalhamentoMedico> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
         Medico medico = medicoRepository.getReferenceById(dados.id());
         medico.atualizarInformacoes(dados);
         medicoRepository.save(medico);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new DadosListagemMedico(medico));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new DadosDetalhamentoMedico(medico));
     }
 
     @DeleteMapping("/{id}")
@@ -50,5 +53,11 @@ public class MedicoController {
         var medico = medicoRepository.getReferenceById(id);
         medico.excluir();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoMedico> datalhar(@PathVariable Long id){
+        var medico = medicoRepository.getReferenceById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new DadosDetalhamentoMedico(medico));
     }
 }
