@@ -1,4 +1,4 @@
-package br.com.passos.api_voll_med.medico;
+package br.com.passos.api_voll_med.domain.medico;
 
 public record DadosListagemMedico(Long id, String nome, String email, String crm, Especialidade especialidade) {
 

@@ -1,6 +1,6 @@
-package br.com.passos.api_voll_med.paciente;
+package br.com.passos.api_voll_med.domain.paciente;
 
-import br.com.passos.api_voll_med.endereco.DadosEndereco;
+import br.com.passos.api_voll_med.domain.endereco.DadosEndereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package br.com.passos.api_voll_med.paciente;
+package br.com.passos.api_voll_med.domain.paciente;
 
 public record DadosListagemPaciente(Long id, String nome, String email, String cpf) {
 

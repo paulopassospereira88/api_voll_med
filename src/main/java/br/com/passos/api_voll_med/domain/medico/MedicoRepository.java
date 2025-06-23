@@ -1,4 +1,4 @@
-package br.com.passos.api_voll_med.medico;
+package br.com.passos.api_voll_med.domain.medico;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

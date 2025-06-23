@@ -1,4 +1,4 @@
-package br.com.passos.api_voll_med.medico;
+package br.com.passos.api_voll_med.domain.medico;
 
 public enum Especialidade {
 

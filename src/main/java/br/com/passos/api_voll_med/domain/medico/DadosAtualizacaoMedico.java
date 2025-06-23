@@ -1,9 +1,9 @@
-package br.com.passos.api_voll_med.paciente;
+package br.com.passos.api_voll_med.domain.medico;
 
-import br.com.passos.api_voll_med.endereco.DadosEndereco;
+import br.com.passos.api_voll_med.domain.endereco.DadosEndereco;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosAtualizacaoPaciente(
+public record DadosAtualizacaoMedico(
         @NotNull
         Long id,
         String nome,

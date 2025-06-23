@@ -1,6 +1,6 @@
 package br.com.passos.api_voll_med.controller;
 
-import br.com.passos.api_voll_med.paciente.*;
+import br.com.passos.api_voll_med.domain.paciente.*;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

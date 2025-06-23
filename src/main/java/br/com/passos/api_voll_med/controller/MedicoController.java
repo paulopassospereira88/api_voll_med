@@ -1,6 +1,6 @@
 package br.com.passos.api_voll_med.controller;
 
-import br.com.passos.api_voll_med.medico.*;
+import br.com.passos.api_voll_med.domain.medico.*;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +23,7 @@ public class MedicoController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<DadosDetalhamentoMedico> cadastro(@RequestBody DadosCadastroMedico dadosCadastroMedico, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DadosDetalhamentoMedico> cadastro(@Valid @RequestBody DadosCadastroMedico dadosCadastroMedico, UriComponentsBuilder uriBuilder) {
         Medico medico = new Medico(dadosCadastroMedico);
         medicoRepository.save(medico);
 
@@ -56,7 +56,7 @@ public class MedicoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DadosDetalhamentoMedico> datalhar(@PathVariable Long id){
+    public ResponseEntity<DadosDetalhamentoMedico> detalhar(@PathVariable Long id){
         var medico = medicoRepository.getReferenceById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(new DadosDetalhamentoMedico(medico));
     }
