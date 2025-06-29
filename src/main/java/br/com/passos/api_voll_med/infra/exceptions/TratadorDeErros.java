@@ -1,4 +1,4 @@
-package br.com.passos.api_voll_med.infra;
+package br.com.passos.api_voll_med.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
