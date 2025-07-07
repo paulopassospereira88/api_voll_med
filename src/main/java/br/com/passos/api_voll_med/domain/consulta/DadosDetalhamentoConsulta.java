@@ -9,4 +9,7 @@ public record DadosDetalhamentoConsulta(
         LocalDateTime data,
         Especialidade especialidade
 ) {
+    public DadosDetalhamentoConsulta(Consulta consulta) {
+        this(consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData(), consulta.getMedico().getEspecialidade());
+    }
 }

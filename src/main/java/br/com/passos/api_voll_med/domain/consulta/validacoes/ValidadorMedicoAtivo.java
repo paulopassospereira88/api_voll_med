@@ -3,9 +3,13 @@ package br.com.passos.api_voll_med.domain.consulta.validacoes;
 import br.com.passos.api_voll_med.domain.consulta.DadosAgendamentoConsulta;
 import br.com.passos.api_voll_med.domain.consulta.ValidacaoException;
 import br.com.passos.api_voll_med.domain.medico.MedicoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class ValidadorMedicoAtivo {
+@Component
+public class ValidadorMedicoAtivo implements ValidadorAgendamentoConsulta {
 
+    @Autowired
     private MedicoRepository medicoRepository;
 
     public void validar(DadosAgendamentoConsulta dadosAgendamentoConsulta){
